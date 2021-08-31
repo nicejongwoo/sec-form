@@ -1,12 +1,13 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://thymeleaf.org">
 <head>
-    <meta charset="UTF-8">
+    <meta charset="UTF-8" http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
     <title>Home</title>
+    <link rel="stylesheet" href="../../static/css/style.css" th:href="@{/css/style.css}"/>
 </head>
 <body>
-    <h1>Hello World</h1>
+    <h1 th:text="#{common.homeWelcome}">welcome</h1>
 
-    <p th:text="${serverTime}">2021년</p>
+    <p th:text="${serverTime}">server time</p>
 </body>
 </html>
