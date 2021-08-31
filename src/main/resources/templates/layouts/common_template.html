@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+    <meta charset="UTF-8">
+    <title>Common</title>
+    <script src="/js/jQuery-2.1.4min.js"></script>
+</head>
+<body>
+    <div align="center" layout:fragment="header">
+        <table>
+            <tr>
+                <td width="80">
+                    <a href="../home.html" th:href="@{/}" th:text="#{header.home}">home</a>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <hr>
+    <div align="center" layout:fragment="content"></div>
+</body>
+</html>

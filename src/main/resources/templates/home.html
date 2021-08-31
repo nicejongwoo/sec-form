@@ -1,13 +1,17 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://thymeleaf.org">
+<html lang="en"
+      xmlns:th="http://thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layouts/main_template}">
 <head>
     <meta charset="UTF-8" http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
     <title>Home</title>
     <link rel="stylesheet" href="../../static/css/style.css" th:href="@{/css/style.css}"/>
 </head>
 <body>
-    <h1 th:text="#{common.homeWelcome}">welcome</h1>
-
-    <p th:text="${serverTime}">server time</p>
+    <div layout:fragment="content">
+        <h1 th:text="#{common.homeWelcome}">welcome</h1>
+        <p th:text="${serverTime}">server time</p>
+    </div>
 </body>
 </html>

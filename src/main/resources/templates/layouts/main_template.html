@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+    <meta charset="UTF-8">
+    <title>Main</title>
+    <script src="/js/jQuery-2.1.4min.js"></script>
+</head>
+<body>
+    <div th:replace="fragments/header::header"></div>
+    <hr>
+    <div th:replace="fragments/menu::menu"></div>
+    <hr>
+    <!--실제 page url에 따라 바뀔 부분이다-->
+    <div align="center" layout:fragment="content"></div>
+    <hr>
+    <div th:replace="fragments/footer::footer"></div>
+    <hr>
+</body>
+</html>
