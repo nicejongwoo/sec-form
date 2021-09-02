@@ -2,4 +2,15 @@
 <!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN" "http://mybatis.org/dtd/mybatis-3-config.dtd">
 <configuration>
 
+    <!-- VO에 리턴값을 받을 때, 카멜케이스 적용 -->
+    <!-- 예) DB 컬럼에 item_no -> itemNo로 자동 맵핑 -->
+    <settings>
+        <setting name="mapUnderscoreToCamelCase" value="true"/>
+    </settings>
+
+    <!-- TypeAlias -->
+    <typeAliases>
+        <package name="com.sec.form.domain"/>
+    </typeAliases>
+
 </configuration>
