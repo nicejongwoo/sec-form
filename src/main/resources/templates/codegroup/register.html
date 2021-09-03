@@ -40,15 +40,15 @@
 	</div>
 
 	<script>
-		$(document).ready(function(){
-			var formObj = $('#codeGroup');
-			$('#btnRegister').on('click', function(){
-				formObj.submit();
-			});
-			$('#btnList').on('click', function(){
-				self.location='list';
-			});
-		});
+		var formObj = document.getElementById('codeGroup');
+		var btnRegister = document.getElementById('btnRegister');
+		var btnList = document.getElementById('btnList');
+		btnRegister.onclick = function(){
+			formObj.submit();
+		}
+		btnList.onclick = function(){
+			self.location='list';
+		}
 	</script>
 </div>
 </body>
