@@ -33,6 +33,23 @@
 			</tr>
 		</table>
 	</form>
+
+	<div>
+		<button type="submit" id="btnRegister" th:text="#{action.register}">등록</button>
+		<button type="submit" id="btnList" th:text="#{action.list}">목록</button>
+	</div>
+
+	<script>
+		$(document).ready(function(){
+			var formObj = $('#codeGroup');
+			$('#btnRegister').on('click', function(){
+				formObj.submit();
+			});
+			$('#btnList').on('click', function(){
+				self.location='list';
+			});
+		});
+	</script>
 </div>
 </body>
 </html>
