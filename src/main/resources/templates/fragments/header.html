@@ -5,17 +5,19 @@
 	<title>Header</title>
 </head>
 <body>
-	<div align="right" th:fragment="header">
-		<table>
-			<tr>
-				<td width="80">
-					<a href="/user/register" th:text="#{header.joinMember}">join</a>
-				</td>
-				<td width="80">
-					<a href="/auth/login" th:text="#{header.login}">login</a>
-				</td>
-			</tr>
-		</table>
+	<div align="right" th:fragment="header" class="navbar navbar-expand-md navbar-dark bd-navbar mb-5 bg-dark">
+		<nav class="container-xxl flex-wrap flex-md-nowrap">
+			<div class="collapse navbar-collapse">
+				<ul class="navbar-nav flex-row flex-wrap bd-navbar-nav pt-2 py-md-0">
+					<li class="nav-item col-6 col-md-auto"><a class="nav-link p-2" href="../home.html" th:href="@{/}" th:text="#{header.home}">home</a></li>
+					<li class="nav-item col-6 col-md-auto"><a class="nav-link p-2" href="../codegroup.html" th:href="@{/codegroup/list}" th:text="#{header.codegroup}">codegroup</a></li>
+				</ul>
+				<ul class="navbar-nav flex-row flex-wrap ms-md-auto">
+					<li class="nav-item col-6 col-md-auto"><a class="nav-link p-2" href="/user/register" th:text="#{header.joinMember}">join</a></li>
+					<li class="nav-item col-6 col-md-auto"><a class="nav-link p-2" href="/auth/login" th:text="#{header.login}">login</a></li>
+				</ul>
+			</div>
+		</nav>
 	</div>
 </body>
 </html>

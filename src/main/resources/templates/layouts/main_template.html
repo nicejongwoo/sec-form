@@ -3,16 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <title>Main</title>
+    <link rel="stylesheet" href="/node_modules/bootstrap/dist/css/bootstrap.min.css" />
+    <script src="/node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
 </head>
-<body>
+<body class="bg-light">
     <div th:replace="fragments/header::header"></div>
-    <hr>
-    <div th:replace="fragments/menu::menu"></div>
-    <hr>
+<!--    <div th:replace="fragments/nav::nav"></div>-->
     <!--실제 page url에 따라 바뀔 부분이다-->
-    <div align="center" layout:fragment="content"></div>
-    <hr>
+    <div layout:fragment="content" class="container"></div>
     <div th:replace="fragments/footer::footer"></div>
-    <hr>
 </body>
 </html>
