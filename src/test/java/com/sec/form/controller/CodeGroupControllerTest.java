@@ -9,8 +9,11 @@ import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.web.servlet.MockMvc;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 @AutoConfigureMybatis
@@ -25,13 +28,25 @@ class CodeGroupControllerTest {
 
     @DisplayName("codegroup 등록 폼")
     @Test
-    void test() throws Exception {
+    void registerFormTest() throws Exception {
         mockMvc.perform(get("/codegroup/register"))
                 .andExpect(status().isOk())
                 .andExpect(view().name("codegroup/register"))
                 .andExpect(model().attributeExists("codeGroup"));
     }
 
+
+    @DisplayName("codegroup 등록 - 정상")
+    @Test
+    void registerTest() throws Exception {
+        mockMvc.perform(post("/codegroup/register")
+                        .param("groupCode", "001")
+                        .param("groupName", "codename"))
+                .andExpect(status().is3xxRedirection())
+                .andExpect(redirectedUrl("/codegroup/list"));
+
+        verify(codeGroupService, times(1)).register(any());
+    }
 
 
 }

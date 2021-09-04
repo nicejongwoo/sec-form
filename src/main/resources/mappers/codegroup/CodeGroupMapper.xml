@@ -3,4 +3,23 @@
 
 <mapper namespace="com.sec.form.mapper.CodeGroupMapper">
 
+    <insert id="create">
+        INSERT INTO code_group
+        (
+            group_code,
+            group_name
+        )
+        VALUES
+        (
+            #{groupCode},
+            #{groupName}
+        )
+    </insert>
+
+    <select id="read" resultType="CodeGroup">
+        SELECT group_code, group_name, use_yn, reg_date
+        FROM code_group
+        WHERE group_code = #{groupCode}
+    </select>
+
 </mapper>

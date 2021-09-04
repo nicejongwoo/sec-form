@@ -1,3 +1,13 @@
+DROP TABLE IF EXISTS code_group;
+DROP TABLE IF EXISTS code_detail;
+DROP TABLE IF EXISTS member_auth;
+DROP TABLE IF EXISTS member;
+DROP TABLE IF EXISTS board;
+DROP TABLE IF EXISTS notice;
+DROP TABLE IF EXISTS item;
+DROP TABLE IF EXISTS pds;
+DROP TABLE IF EXISTS pds_attach;
+
 -- 코드
 CREATE TABLE code_group (
     group_code CHAR(3) NOT NULL,
