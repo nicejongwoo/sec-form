@@ -22,4 +22,14 @@
         WHERE group_code = #{groupCode}
     </select>
 
+    <select id="list" resultType="CodeGroup">
+        SELECT
+            group_code,
+            group_name,
+            use_yn,
+            reg_date
+        FROM code_group
+        ORDER BY group_code DESC, reg_date DESC
+    </select>
+
 </mapper>

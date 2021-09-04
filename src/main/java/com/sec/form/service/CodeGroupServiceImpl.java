@@ -5,6 +5,8 @@ import com.sec.form.mapper.CodeGroupMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @RequiredArgsConstructor
 @Service
 public class CodeGroupServiceImpl implements CodeGroupService{
@@ -14,5 +16,10 @@ public class CodeGroupServiceImpl implements CodeGroupService{
     @Override
     public void register(CodeGroup codeGroup) {
         codeGroupMapper.create(codeGroup);
+    }
+
+    @Override
+    public List<CodeGroup> list() {
+        return codeGroupMapper.list();
     }
 }

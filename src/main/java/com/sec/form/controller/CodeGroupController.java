@@ -29,4 +29,9 @@ public class CodeGroupController {
         redirectAttributes.addFlashAttribute("msg", "success");
         return "redirect:/codegroup/list";
     }
+
+    @GetMapping("/list")
+    public void list(Model model) {
+        model.addAttribute("list", codeGroupService.list());
+    }
 }

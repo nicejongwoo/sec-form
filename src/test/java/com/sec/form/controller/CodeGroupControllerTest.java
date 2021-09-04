@@ -14,6 +14,7 @@ import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 @AutoConfigureMybatis
@@ -43,9 +44,20 @@ class CodeGroupControllerTest {
                         .param("groupCode", "001")
                         .param("groupName", "codename"))
                 .andExpect(status().is3xxRedirection())
+                .andExpect(flash().attributeExists("msg"))
                 .andExpect(redirectedUrl("/codegroup/list"));
 
         verify(codeGroupService, times(1)).register(any());
+    }
+
+
+    @DisplayName("리스트")
+    @Test
+    void listTest() throws Exception {
+        mockMvc.perform(get("/codegroup/list"))
+                .andDo(print())
+                .andExpect(status().isOk())
+                .andExpect(view().name("codegroup/list"));
     }
 
 
