@@ -8,4 +8,6 @@ public interface CodeGroupService {
     void register(CodeGroup codeGroup);
 
     List<CodeGroup> list();
+
+    CodeGroup read(String groupCode);
 }

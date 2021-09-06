@@ -34,4 +34,9 @@ public class CodeGroupController {
     public void list(Model model) {
         model.addAttribute("list", codeGroupService.list());
     }
+
+    @GetMapping("/read")
+    public void read(String groupCode, Model model) {
+        model.addAttribute(codeGroupService.read(groupCode));
+    }
 }

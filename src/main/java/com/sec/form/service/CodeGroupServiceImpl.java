@@ -22,4 +22,9 @@ public class CodeGroupServiceImpl implements CodeGroupService{
     public List<CodeGroup> list() {
         return codeGroupMapper.list();
     }
+
+    @Override
+    public CodeGroup read(String groupCode) {
+        return codeGroupMapper.read(groupCode);
+    }
 }
