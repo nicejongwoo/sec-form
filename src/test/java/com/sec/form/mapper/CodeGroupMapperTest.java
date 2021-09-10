@@ -1,6 +1,7 @@
 package com.sec.form.mapper;
 
 import com.sec.form.domain.CodeGroup;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.mybatis.spring.boot.test.autoconfigure.MybatisTest;
@@ -17,24 +18,24 @@ class CodeGroupMapperTest {
     @Autowired
     private CodeGroupMapper codeGroupMapper;
 
-    @DisplayName("register_mapper_test")
-    @Test
-    void registerMapperTest() {
+    @BeforeEach
+    public void beforeEach() {
         CodeGroup codeGroup = new CodeGroup();
         codeGroup.setGroupCode("001");
         codeGroup.setGroupName("codename");
         codeGroupMapper.create(codeGroup);
-        CodeGroup savedData = codeGroupMapper.read(codeGroup.getGroupCode());
-        assertEquals(codeGroup.getGroupCode(), savedData.getGroupCode());
+    }
+
+    @DisplayName("register_mapper_test")
+    @Test
+    void registerMapperTest() {
+        CodeGroup savedData = codeGroupMapper.read("001");
+        assertEquals("001", savedData.getGroupCode());
     }
 
     @DisplayName("list_mapper_test")
     @Test
     void listMapperTest(){
-        CodeGroup codeGroup = new CodeGroup();
-        codeGroup.setGroupCode("001");
-        codeGroup.setGroupName("codename");
-        codeGroupMapper.create(codeGroup);
         List<CodeGroup> list = codeGroupMapper.list();
         assertEquals(1, list.size());
     }
