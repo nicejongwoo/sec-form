@@ -1,5 +1,6 @@
 package com.sec.form.controller;
 
+import com.sec.form.domain.CodeGroup;
 import com.sec.form.service.CodeGroupService;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -10,8 +11,7 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.web.servlet.MockMvc;
 
 import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.Mockito.times;
-import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
@@ -58,6 +58,23 @@ class CodeGroupControllerTest {
                 .andDo(print())
                 .andExpect(status().isOk())
                 .andExpect(view().name("codegroup/list"));
+    }
+
+
+    @DisplayName("codegroup 상세조회 테스트")
+    @Test
+    void codeGroupReadTest() throws Exception {
+        CodeGroup codeGroup = new CodeGroup();
+        codeGroup.setGroupCode("001");
+        codeGroup.setGroupName("test");
+        when(codeGroupService.read(any())).thenReturn(codeGroup);
+        mockMvc.perform(get("/codegroup/read")
+                        .param("groupCode", "001")
+                )
+                .andDo(print())
+                .andExpect(status().isOk())
+                .andExpect(model().attributeExists("codeGroup"))
+                .andExpect(view().name("codegroup/read"));
     }
 
 
