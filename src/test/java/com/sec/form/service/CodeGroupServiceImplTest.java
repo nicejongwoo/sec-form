@@ -63,4 +63,21 @@ class CodeGroupServiceImplTest {
 
     }
 
+
+    @DisplayName("codeGroup read test")
+    @Test
+    void test(){
+        //given
+        CodeGroup codeGroup = new CodeGroup();
+        codeGroup.setGroupCode("001");
+        codeGroup.setGroupName("test");
+        given(codeGroupMapper.read(codeGroup.getGroupCode())).willReturn(codeGroup);
+
+        //when
+        CodeGroup readValue = codeGroupService.read("001");
+
+        //then
+        assertEquals(readValue.getGroupName(), codeGroup.getGroupName());
+    }
+
 }
