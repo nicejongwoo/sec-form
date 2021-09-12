@@ -3,6 +3,11 @@
 
 <mapper namespace="com.sec.form.mapper.CodeMapper">
 
-
+    <select id="getCodeGroupList" resultType="CodeGroupValue">
+        SELECT group_code AS value, group_name AS label
+        FROM code_group
+        WHERE use_yn = 'Y'
+        ORDER BY group_name
+    </select>
 
 </mapper>
