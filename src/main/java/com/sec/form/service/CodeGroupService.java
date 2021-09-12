@@ -12,4 +12,6 @@ public interface CodeGroupService {
     CodeGroup read(String groupCode);
 
     void modify(CodeGroup codeGroup);
+
+    void remove(String groupCode);
 }

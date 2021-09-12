@@ -51,4 +51,11 @@ public class CodeGroupController {
         redirectAttributes.addFlashAttribute("msg", "success");
         return "redirect:/codegroup/list";
     }
+
+    @PostMapping("/remove")
+    public String remove(String groupCode, RedirectAttributes redirectAttributes) {
+        codeGroupService.remove(groupCode);
+        redirectAttributes.addFlashAttribute("msg", "success");
+        return "redirect:/codegroup/list";
+    }
 }

@@ -32,4 +32,9 @@ public class CodeGroupServiceImpl implements CodeGroupService{
     public void modify(CodeGroup codeGroup) {
         codeGroupMapper.update(codeGroup);
     }
+
+    @Override
+    public void remove(String groupCode) {
+        codeGroupMapper.delete(groupCode);
+    }
 }
