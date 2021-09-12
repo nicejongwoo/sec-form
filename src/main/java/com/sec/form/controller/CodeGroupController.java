@@ -39,4 +39,16 @@ public class CodeGroupController {
     public void read(String groupCode, Model model) {
         model.addAttribute(codeGroupService.read(groupCode));
     }
+
+    @GetMapping("/modify")
+    public void modifyForm(String groupCode, Model model) {
+        model.addAttribute("codeGroup", codeGroupService.read(groupCode));
+    }
+
+    @PostMapping("/modify")
+    public String modify(CodeGroup codeGroup, RedirectAttributes redirectAttributes) {
+        codeGroupService.modify(codeGroup);
+        redirectAttributes.addFlashAttribute("msg", "success");
+        return "redirect:/codegroup/list";
+    }
 }

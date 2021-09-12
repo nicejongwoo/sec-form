@@ -13,4 +13,5 @@ public interface CodeGroupMapper {
 
     List<CodeGroup> list();
 
+    void update(CodeGroup codeGroup);
 }

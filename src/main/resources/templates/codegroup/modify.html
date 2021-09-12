@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layouts/main_template}">
+<head>
+	<meta charset="UTF-8" http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+	<title>CodeGroup</title>
+</head>
+<body>
+<div layout:fragment="content">
+	<h2 th:text="#{codegroup.header.modify}">코드그룹 수정</h2>
+	<form id="codeGroup" action="list.html" th:action="@{/codegroup/modify}" th:object="${codeGroup}" method="POST">
+		<div class="mb-3">
+			<label for="groupCode" class="form-label" th:text="#{codegroup.groupCode}">groupCode</label>
+			<input type="text" class="form-control" name="groupCode" id="groupCode" aria-describedby="groupCodeHelp" th:field="*{groupCode}" readonly>
+			<div id="groupCodeHelp" class="form-text error_message" th:if="${#fields.hasErrors('groupCode')}" th:errors="*{groupCode}">에러메시지</div>
+		</div>
+		<div class="mb-3">
+			<label for="groupName" class="form-label" th:text="#{codegroup.groupName}">groupName</label>
+			<input type="text" class="form-control" name="groupName" id="groupName" aria-describedby="groupNameHelp" th:field="*{groupName}">
+			<div id="groupNameHelp" class="form-text error_message" th:if="${#fields.hasErrors('groupName')}" th:errors="*{groupName}">에러메시지</div>
+		</div>
+		<button type="submit" id="btnModify" class="btn btn-primary" th:text="#{action.modify}">등록</button>
+		<button type="button" id="btnList" class="btn btn-secondary" th:text="#{action.list}">목록</button>
+	</form>
+
+	<script>
+		var formObj = document.getElementById('codeGroup');
+		var btnModify = document.getElementById('btnModify');
+		var btnList = document.getElementById('btnList');
+		btnRegister.onclick = function(){
+			formObj.submit();
+		}
+		btnList.onclick = function(){
+			self.location='list';
+		}
+	</script>
+</div>
+</body>
+</html>

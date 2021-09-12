@@ -10,4 +10,6 @@ public interface CodeGroupService {
     List<CodeGroup> list();
 
     CodeGroup read(String groupCode);
+
+    void modify(CodeGroup codeGroup);
 }

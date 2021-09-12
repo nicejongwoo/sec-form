@@ -32,4 +32,10 @@
         ORDER BY group_code DESC, reg_date DESC
     </select>
 
+    <update id="update">
+        UPDATE code_group
+        SET group_name = #{groupName}, update_date = now()
+        WHERE group_code = #{groupCode}
+    </update>
+
 </mapper>

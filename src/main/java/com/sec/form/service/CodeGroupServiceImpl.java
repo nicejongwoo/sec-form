@@ -27,4 +27,9 @@ public class CodeGroupServiceImpl implements CodeGroupService{
     public CodeGroup read(String groupCode) {
         return codeGroupMapper.read(groupCode);
     }
+
+    @Override
+    public void modify(CodeGroup codeGroup) {
+        codeGroupMapper.update(codeGroup);
+    }
 }
