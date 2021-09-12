@@ -3,6 +3,27 @@
 
 <mapper namespace="com.sec.form.mapper.CodeDetailMapper">
 
+    <insert id="create">
+        INSERT INTO code_detail
+        (
+            group_code,
+            code_value,
+            code_name,
+            sort_seq
+        )
+        VALUES
+        (
+            #{groupCode},
+            #{codeValue},
+            #{codeName},
+            #{sortSeq}
+        )
+    </insert>
 
+    <select id="getMaxSortSeq" resultType="int">
+        SELECT IFNULL(MAX(sort_seq), 0)
+        FROM code_detail
+        WHERE group_code = #{groupCode}
+    </select>
 
 </mapper>

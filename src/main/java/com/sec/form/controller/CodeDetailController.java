@@ -7,7 +7,9 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @RequiredArgsConstructor
 @Controller
@@ -21,6 +23,13 @@ public class CodeDetailController {
     public void registerForm(Model model) {
         model.addAttribute(new CodeDetail());
         model.addAttribute("groupCodeList", codeService.getCodeGroupList());
+    }
+
+    @PostMapping("/register")
+    public void register(CodeDetail codeDetail, RedirectAttributes redirectAttributes) {
+        codeDetailService.register(codeDetail);
+        redirectAttributes.addFlashAttribute("msg", "success");
+//        return "redirect:/list";
     }
 
 }

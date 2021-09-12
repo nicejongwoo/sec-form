@@ -25,7 +25,7 @@
 		</div>
 		<div class="mb-3">
 			<label for="codeName" class="form-label" th:text="#{codedetail.codeName}">Email address</label>
-			<input type="text" class="form-control" name="codeValue" id="codeName" aria-describedby="codeNameHelp">
+			<input type="text" class="form-control" name="codeName" id="codeName" aria-describedby="codeNameHelp">
 			<div id="codeNameHelp" class="form-text error_message" th:if="${#fields.hasErrors('codeName')}" th:errors="*{codeName}">에러메시지</div>
 		</div>
 		<button type="submit" id="btnRegister" class="btn btn-primary" th:text="#{action.register}">등록</button>
