@@ -3,7 +3,7 @@
 
 <mapper namespace="com.sec.form.mapper.CodeMapper">
 
-    <select id="getCodeGroupList" resultType="CodeGroupValue">
+    <select id="getCodeGroupList" resultType="CodeLabelValue">
         SELECT group_code AS value, group_name AS label
         FROM code_group
         WHERE use_yn = 'Y'
