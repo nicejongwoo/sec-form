@@ -5,6 +5,8 @@ import com.sec.form.mapper.CodeDetailMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @RequiredArgsConstructor
 @Service
 public class CodeDetailServiceImpl implements CodeDetailService{
@@ -17,5 +19,10 @@ public class CodeDetailServiceImpl implements CodeDetailService{
         int maxSortSeq = codeDetailMapper.getMaxSortSeq(groupCode);
         codeDetail.setSortSeq(maxSortSeq);
         codeDetailMapper.create(codeDetail);
+    }
+
+    @Override
+    public List<CodeDetail> list() {
+        return codeDetailMapper.list();
     }
 }

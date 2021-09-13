@@ -26,4 +26,10 @@
         WHERE group_code = #{groupCode}
     </select>
 
+    <select id="list" resultType="CodeDetail">
+        SELECT *
+        FROM code_detail
+        ORDER BY group_code ASC, sort_seq ASC
+    </select>
+
 </mapper>

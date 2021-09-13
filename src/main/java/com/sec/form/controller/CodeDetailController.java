@@ -26,10 +26,15 @@ public class CodeDetailController {
     }
 
     @PostMapping("/register")
-    public void register(CodeDetail codeDetail, RedirectAttributes redirectAttributes) {
+    public String register(CodeDetail codeDetail, RedirectAttributes redirectAttributes) {
         codeDetailService.register(codeDetail);
         redirectAttributes.addFlashAttribute("msg", "success");
-//        return "redirect:/list";
+        return "redirect:/codedetail/list";
+    }
+
+    @GetMapping("/list")
+    public void list(Model model) {
+        model.addAttribute("list", codeDetailService.list());
     }
 
 }
