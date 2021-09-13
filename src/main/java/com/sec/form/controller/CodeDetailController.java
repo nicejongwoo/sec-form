@@ -37,4 +37,10 @@ public class CodeDetailController {
         model.addAttribute("list", codeDetailService.list());
     }
 
+    @GetMapping("/read")
+    public void read(CodeDetail codeDetail, Model model) {
+        model.addAttribute(codeDetailService.read(codeDetail));
+        model.addAttribute("groupCodeList", codeService.getCodeGroupList());
+    }
+
 }

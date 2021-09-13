@@ -10,4 +10,6 @@ public interface CodeDetailMapper {
     int getMaxSortSeq(String groupCode);
 
     List<CodeDetail> list();
+
+    CodeDetail read(CodeDetail codeDetail);
 }

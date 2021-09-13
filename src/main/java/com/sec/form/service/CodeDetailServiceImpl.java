@@ -25,4 +25,9 @@ public class CodeDetailServiceImpl implements CodeDetailService{
     public List<CodeDetail> list() {
         return codeDetailMapper.list();
     }
+
+    @Override
+    public CodeDetail read(CodeDetail codeDetail) {
+        return codeDetailMapper.read(codeDetail);
+    }
 }

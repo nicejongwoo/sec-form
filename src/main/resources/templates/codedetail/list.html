@@ -32,7 +32,7 @@
 			<tr th:each="codeDetail:${list}">
 				<td th:text="${codeDetail.groupCode}">${codeDetail.groupCode}</td>
 				<td th:text="${codeDetail.codeValue}">${codeDetail.codeValue}</td>
-				<td><a th:text="${codeDetail.codeName}" th:href="|/codedetail/read?groupCode=${codeDetail.groupCode}&codeValue=${codeDetail.codeValue}}|">${codeDetail.codeName}</a></td>
+				<td><a th:text="${codeDetail.codeName}" th:href="|/codedetail/read?groupCode=${codeDetail.groupCode}&codeValue=${codeDetail.codeValue}|">${codeDetail.codeName}</a></td>
 				<td th:text="${codeDetail.sortSeq}">${codeDetail.sortSeq}</td>
 				<td th:text="${#temporals.format(codeDetail.regDate, 'yyyy-MM-dd HH:mm')}">${codeDetail.regDate}</td>
 			</tr>
