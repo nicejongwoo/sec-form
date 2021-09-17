@@ -12,4 +12,6 @@ public interface CodeDetailMapper {
     List<CodeDetail> list();
 
     CodeDetail read(CodeDetail codeDetail);
+
+    void update(CodeDetail codeDetail);
 }

@@ -30,4 +30,9 @@ public class CodeDetailServiceImpl implements CodeDetailService{
     public CodeDetail read(CodeDetail codeDetail) {
         return codeDetailMapper.read(codeDetail);
     }
+
+    @Override
+    public void modify(CodeDetail codeDetail) {
+        codeDetailMapper.update(codeDetail);
+    }
 }

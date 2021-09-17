@@ -11,4 +11,6 @@ public interface CodeDetailService {
     List<CodeDetail> list();
 
     CodeDetail read(CodeDetail codeDetail);
+
+    void modify(CodeDetail codeDetail);
 }

@@ -47,10 +47,17 @@ public class CodeDetailController {
     }
 
     @GetMapping("/modify")
-    public void modify(CodeDetail codeDetail, Model model) {
+    public void modifyForm(CodeDetail codeDetail, Model model) {
         model.addAttribute(codeDetailService.read(codeDetail));
         List<CodeLabelValue> codeGroupList = codeService.getCodeGroupList();
         model.addAttribute("groupCodeList", codeGroupList);
+    }
+
+    @PostMapping("/modify")
+    public String modify(CodeDetail codeDetail, RedirectAttributes redirectAttributes) {
+        codeDetailService.modify(codeDetail);
+        redirectAttributes.addFlashAttribute("msg", "success");
+        return "redirect:/codedetail/list";
     }
 
 }

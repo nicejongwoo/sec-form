@@ -39,4 +39,11 @@
         AND code_value = #{codeValue}
     </select>
 
+    <update id="update">
+        UPDATE code_detail
+        SET code_name = #{codeName}
+        WHERE group_code = #{groupCode}
+        AND code_value = #{codeValue}
+    </update>
+
 </mapper>

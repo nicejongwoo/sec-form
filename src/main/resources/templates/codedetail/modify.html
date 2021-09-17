@@ -20,7 +20,7 @@
 		</div>
 		<div class="mb-3">
 			<label for="codeValue" class="form-label" th:text="#{codedetail.codeValue}">Email address</label>
-			<input type="text" class="form-control" name="codeValue" id="codeValue" th:field="*{codeValue}" aria-describedby="codeValueHelp">
+			<input type="text" class="form-control" name="codeValue" id="codeValue" th:field="*{codeValue}" aria-describedby="codeValueHelp" readonly>
 			<div id="codeValueHelp" class="form-text error_message" th:if="${#fields.hasErrors('codeValue')}" th:errors="*{codeValue}">에러메시지</div>
 		</div>
 		<div class="mb-3">
