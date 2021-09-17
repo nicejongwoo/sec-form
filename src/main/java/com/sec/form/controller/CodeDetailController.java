@@ -1,6 +1,7 @@
 package com.sec.form.controller;
 
 import com.sec.form.domain.CodeDetail;
+import com.sec.form.domain.CodeLabelValue;
 import com.sec.form.service.CodeDetailService;
 import com.sec.form.service.CodeService;
 import lombok.RequiredArgsConstructor;
@@ -10,6 +11,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
+import java.util.List;
 
 @RequiredArgsConstructor
 @Controller
@@ -41,6 +44,13 @@ public class CodeDetailController {
     public void read(CodeDetail codeDetail, Model model) {
         model.addAttribute(codeDetailService.read(codeDetail));
         model.addAttribute("groupCodeList", codeService.getCodeGroupList());
+    }
+
+    @GetMapping("/modify")
+    public void modify(CodeDetail codeDetail, Model model) {
+        model.addAttribute(codeDetailService.read(codeDetail));
+        List<CodeLabelValue> codeGroupList = codeService.getCodeGroupList();
+        model.addAttribute("groupCodeList", codeGroupList);
     }
 
 }
