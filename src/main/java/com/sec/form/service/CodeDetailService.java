@@ -13,4 +13,6 @@ public interface CodeDetailService {
     CodeDetail read(CodeDetail codeDetail);
 
     void modify(CodeDetail codeDetail);
+
+    void remove(CodeDetail codeDetail);
 }

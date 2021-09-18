@@ -46,4 +46,10 @@
         AND code_value = #{codeValue}
     </update>
 
+    <delete id="delete">
+        DELETE FROM code_detail
+        WHERE group_code = #{groupCode}
+        AND code_value = #{codeValue}
+    </delete>
+
 </mapper>

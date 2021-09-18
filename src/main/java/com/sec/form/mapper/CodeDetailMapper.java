@@ -14,4 +14,6 @@ public interface CodeDetailMapper {
     CodeDetail read(CodeDetail codeDetail);
 
     void update(CodeDetail codeDetail);
+
+    void delete(CodeDetail codeDetail);
 }

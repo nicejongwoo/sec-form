@@ -60,4 +60,11 @@ public class CodeDetailController {
         return "redirect:/codedetail/list";
     }
 
+    @PostMapping("/remove")
+    public String remove(CodeDetail codeDetail, RedirectAttributes redirectAttributes) {
+        codeDetailService.remove(codeDetail);
+        redirectAttributes.addFlashAttribute("msg", "success");
+        return "redirect:/codedetail/list";
+    }
+
 }

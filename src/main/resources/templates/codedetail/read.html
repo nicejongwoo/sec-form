@@ -13,6 +13,7 @@
 
 	<form id="codeDetail" action="#" th:action="@{/codedetail/remove}" th:object="${codeDetail}" method="post">
 		<input type="hidden" name="groupCode" th:field="*{groupCode}" id="groupCode">
+		<input type="hidden" name="codeValue" th:field="*{codeValue}" id="codeValue">
 		<table class="table">
 			<thead>
 			<tr>
@@ -43,7 +44,7 @@
 		var btnModify = document.getElementById('btnModify');
 		var btnList = document.getElementById('btnList');
 		var btnRemove = document.getElementById('btnRemove');
-		var formObj = document.getElementById('codeGroup');
+		var formObj = document.getElementById('codeDetail');
 
 		/*<![CDATA[*/
 		var groupCode = [[${codeDetail.groupCode}]];

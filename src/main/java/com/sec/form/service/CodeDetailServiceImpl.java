@@ -35,4 +35,9 @@ public class CodeDetailServiceImpl implements CodeDetailService{
     public void modify(CodeDetail codeDetail) {
         codeDetailMapper.update(codeDetail);
     }
+
+    @Override
+    public void remove(CodeDetail codeDetail) {
+        codeDetailMapper.delete(codeDetail);
+    }
 }
