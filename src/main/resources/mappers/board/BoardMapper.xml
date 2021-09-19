@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.sec.form.mapper.BoardMapper">
+
+    <insert id="create">
+        INSERT INTO board
+        (
+            title,
+            content,
+            writer
+        )
+        VALUES
+        (
+            #{title},
+            #{content},
+            #{writer}
+        )
+    </insert>
+
+    <select id="list" resultType="Board">
+        <![CDATA[
+        SELECT *
+        FROM board
+        WHERE board_no > 0
+        ORDER BY board_no DESC, reg_date DESC
+        ]]>
+    </select>
+
+    <select id="read" resultType="Board">
+        SELECT *
+        FROM board
+        WHERE board_no = #{boardNo}
+    </select>
+
+    <update id="update">
+        UPDATE board
+        SET title = #{title}, content = #{content}
+        WHERE board_no = #{boardNo}
+    </update>
+
+    <delete id="delete">
+        DELETE FROM board
+        WHERE board_no = #{boardNo}
+    </delete>
+
+</mapper>

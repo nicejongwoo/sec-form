@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layouts/main_template}">
+<head>
+	<meta charset="UTF-8" http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+	<title>Board</title>
+</head>
+<body>
+<div layout:fragment="content">
+	<h2 th:text="#{board.header.list}">목록</h2>
+
+	<div class="btn-group">
+		<a class="btn btn-primary" href="register.html" th:href="@{/board/register}" th:text="#{action.new}">글쓰기</a>
+	</div>
+
+	<table class="table">
+		<thead>
+			<tr>
+				<th th:text="#{board.no}">No</th>
+				<th th:text="#{board.title}">title</th>
+				<th th:text="#{board.writer}">writer</th>
+				<th th:text="#{board.regdate}">regdate</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr th:if="${#lists.isEmpty(list)}">
+				<td colspan="4" th:text="#{common.listEmpty}">게시글이 없습니다.</td>
+			</tr>
+			<tr th:each="board:${list}">
+				<td th:text="${board.boardNo}">No</td>
+				<td><a th:text="${board.title}" th:href="|/board/read?boardNo=${board.boardNo}|">title</a></td>
+				<td th:text="${board.writer}">writer</td>
+				<td th:text="${#temporals.format(board.regDate, 'yyyy-MM-dd HH:mm')}">regDate</td>
+			</tr>
+		</tbody>
+	</table>
+
+	<script th:inline="javascript">
+		var result = [[${msg}]];
+		if(result==='success'){
+			alert([[#{common.processSuccess}]]);
+		}
+	</script>
+</div>
+</body>
+</html>

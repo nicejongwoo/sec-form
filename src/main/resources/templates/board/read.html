@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layouts/main_template}">
+<head>
+	<meta charset="UTF-8" http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+	<title>Board</title>
+</head>
+<body>
+<div layout:fragment="content">
+	<h2 th:text="#{board.header.read}">상세조회</h2>
+
+	<form id="submitForm" action="#" th:action="@{/board/remove}" th:object="${board}" method="post">
+		<input type="hidden" name="boardNo" th:field="*{boardNo}" id="boardNo">
+		<table class="table">
+			<thead>
+			<tr>
+				<th th:text="#{board.title}">title</th>
+				<th th:text="#{board.writer}">writer</th>
+				<th th:text="#{board.content}">content</th>
+				<th th:text="#{board.regdate}">regdate</th>
+			</tr>
+			</thead>
+			<tbody>
+			<tr>
+				<td th:text="*{title}">title</td>
+				<td th:text="*{writer}">writer</a></td>
+				<td th:text="*{content}">content</a></td>
+				<td th:text="*{#temporals.format(regDate, 'yyyy-MM-dd HH:mm')}">regDate</td>
+			</tr>
+			</tbody>
+		</table>
+	</form>
+
+	<div class="btn-group">
+		<button type="button" id="btnModify" class="btn btn-primary" th:text="#{action.modify}">수정</button>
+		<button type="button" id="btnList" class="btn btn-secondary" th:text="#{action.list}">목록</button>
+		<button type="button" id="btnRemove" class="btn btn-danger" th:text="#{action.remove}">삭제</button>
+	</div>
+
+	<script th:inline="javascript">
+		var btnModify = document.getElementById('btnModify');
+		var btnList = document.getElementById('btnList');
+		var btnRemove = document.getElementById('btnRemove');
+		var formObj = document.getElementById('submitForm');
+
+		/*<![CDATA[*/
+		var boardNo = [[${board.boardNo}]];
+		/*]]>*/
+		btnModify.onclick = function(){
+			self.location='modify?boardNo=' + boardNo;
+		}
+
+		btnList.onclick = function(){
+			self.location='list';
+		}
+
+		btnRemove.onclick = function(e){
+			e.preventDefault();
+			formObj.submit();
+		}
+	</script>
+
+</div>
+
+</body>
+</html>
