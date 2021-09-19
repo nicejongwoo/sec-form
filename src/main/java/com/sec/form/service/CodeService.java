@@ -8,4 +8,5 @@ public interface CodeService {
 
     List<CodeLabelValue> getCodeGroupList();
 
+    List<CodeLabelValue> getCodeList(String groupCode);
 }

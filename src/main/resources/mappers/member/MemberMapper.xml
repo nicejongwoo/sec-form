@@ -4,4 +4,34 @@
 <mapper namespace="com.sec.form.mapper.MemberMapper">
 
 
+    <insert id="create" useGeneratedKeys="true" keyProperty="userNo">
+        INSERT INTO member
+        (
+            user_id,
+            user_pw,
+            user_name,
+            job
+        )
+        VALUES
+        (
+            #{userId},
+            #{userPw},
+            #{userName},
+            #{job}
+        )
+    </insert>
+
+    <insert id="createAuth">
+        INSERT INTO member_auth
+        (
+            user_no,
+            auth
+        )
+        VALUES
+        (
+            #{userNo},
+            #{auth}
+        )
+    </insert>
+
 </mapper>

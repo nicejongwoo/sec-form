@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layouts/main_template}">
+<head>
+	<meta charset="UTF-8" http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+	<title>member</title>
+</head>
+<body>
+<div layout:fragment="content">
+	<h2 th:text="#{user.header.register}">등록</h2>
+	<form id="submitForm" action="register.html" th:action="@{/user/register}" th:object="${member}" method="POST">
+		<div class="mb-3">
+			<label for="userId" class="form-label" th:text="#{user.userId}">userId</label>
+			<input type="text" class="form-control" name="userId" id="userId" aria-describedby="userIdHelp">
+			<div id="userIdHelp" class="form-text error_message" th:if="${#fields.hasErrors('userId')}" th:errors="*{userId}">에러메시지</div>
+		</div>
+		<div class="mb-3">
+			<label for="userPw" class="form-label" th:text="#{user.userPw}">userPw</label>
+			<input type="password" class="form-control" name="userPw" id="userPw" aria-describedby="userPwHelp">
+			<div id="userPwHelp" class="form-text error_message" th:if="${#fields.hasErrors('userPw')}" th:errors="*{userPw}">에러메시지</div>
+		</div>
+		<div class="mb-3">
+			<label for="userName" class="form-label" th:text="#{user.userName}">userPw</label>
+			<input type="text" class="form-control" name="userName" id="userName" aria-describedby="userNameHelp">
+			<div id="userNameHelp" class="form-text error_message" th:if="${#fields.hasErrors('userName')}" th:errors="*{userName}">에러메시지</div>
+		</div>
+		<div class="mb-3">
+			<label for="job" class="form-label" th:text="#{user.job}">job</label>
+			<select th:field="*{job}" id="job" class="form-select">
+				<option th:each="job:${jobList}" th:value="${job.value}" th:text="${job.label}">코드명</option>
+			</select>
+			<div id="jobHelp" class="form-text error_message" th:if="${#fields.hasErrors('job')}" th:errors="*{job}">에러메시지</div>
+		</div>
+		<button type="submit" id="btnRegister" class="btn btn-primary" th:text="#{action.register}">등록</button>
+	</form>
+
+	<script>
+		var formObj = document.getElementById('submitForm');
+		var btnRegister = document.getElementById('btnRegister');
+		btnRegister.onclick = function(){
+			formObj.submit();
+		}
+	</script>
+</div>
+</body>
+</html>

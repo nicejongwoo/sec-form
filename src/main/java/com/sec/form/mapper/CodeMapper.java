@@ -8,4 +8,5 @@ public interface CodeMapper {
 
     List<CodeLabelValue> getCodeGroupList();
 
+    List<CodeLabelValue> getCodeList(String groupCode);
 }

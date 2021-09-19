@@ -17,4 +17,9 @@ public class CodeServiceImpl implements CodeService {
     public List<CodeLabelValue> getCodeGroupList() {
         return codeMapper.getCodeGroupList();
     }
+
+    @Override
+    public List<CodeLabelValue> getCodeList(String groupCode) {
+        return codeMapper.getCodeList(groupCode);
+    }
 }

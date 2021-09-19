@@ -10,4 +10,12 @@
         ORDER BY group_name
     </select>
 
+    <select id="getCodeList" resultType="CodeLabelValue">
+        SELECT code_value AS value, code_name AS label
+        FROM code_detail
+        WHERE group_code = #{groupCode}
+        AND use_yn = 'Y'
+        ORDER BY sort_seq
+    </select>
+
 </mapper>
