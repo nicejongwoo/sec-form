@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layouts/main_template}">
+<head>
+	<meta charset="UTF-8" http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+	<title>notice</title>
+</head>
+<body>
+<div layout:fragment="content">
+	<h2 th:text="#{notice.header.register}">등록</h2>
+	<form id="submitForm" action="register.html" th:action="@{/notice/register}" th:object="${notice}" method="POST">
+		<div class="mb-3">
+			<label for="title" class="form-label" th:text="#{notice.title}">title</label>
+			<input type="text" class="form-control" name="title" id="title" aria-describedby="titleHelp">
+			<div id="titleHelp" class="form-text error_message" th:if="${#fields.hasErrors('title')}" th:errors="*{title}">에러메시지</div>
+		</div>
+		<div class="mb-3">
+			<label for="content" class="form-label" th:text="#{notice.content}">content</label>
+			<textarea name="content" id="content" th:field="*{content}"></textarea>
+			<div id="contentHelp" class="form-text error_message" th:if="${#fields.hasErrors('content')}" th:errors="*{content}">에러메시지</div>
+		</div>
+		<button type="submit" id="btnRegister" class="btn btn-primary" th:text="#{action.register}">등록</button>
+		<button type="button" id="btnList" class="btn btn-secondary" th:text="#{action.list}">목록</button>
+	</form>
+
+	<script>
+		var formObj = document.getElementById('submitForm');
+		var btnRegister = document.getElementById('btnRegister');
+		var btnList = document.getElementById('btnList');
+		btnRegister.onclick = function(){
+			formObj.submit();
+		}
+		btnList.onclick = function(){
+			self.location='list';
+		}
+	</script>
+</div>
+</body>
+</html>
