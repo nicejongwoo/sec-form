@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.io.IOException;
 
@@ -41,4 +42,11 @@ public class PdsController {
         return "pds/register";
     }
 
+    @PostMapping("/register")
+    public String register(Pds pds, RedirectAttributes redirectAttributes) {
+        System.out.println("file=" + pds.getFiles());
+        pdsService.register(pds);
+        redirectAttributes.addFlashAttribute("msg", "success");
+        return "pds/list";
+    }
 }

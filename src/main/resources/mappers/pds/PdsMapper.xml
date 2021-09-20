@@ -3,5 +3,30 @@
 
 <mapper namespace="com.sec.form.mapper.PdsMapper">
 
+    <insert id="create">
+        INSERT INTO pds
+        (
+            item_name,
+            description
+        )
+        VALUES
+        (
+            #{itemName},
+            #{description}
+        )
+    </insert>
+
+    <insert id="addAttach">
+        INSERT INTO pds_attach
+        (
+            full_name,
+            item_id
+        )
+        VALUES
+        (
+            #{fullName},
+            LAST_INSERT_ID()
+        )
+    </insert>
 
 </mapper>

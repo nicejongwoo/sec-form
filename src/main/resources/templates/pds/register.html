@@ -18,7 +18,7 @@
 		</div>
 		<div class="mb-3">
 			<label for="itemFile" class="form-label" th:text="#{pds.itemFile}">file</label>
-			<input type="file" class="form-control" name="itemFile" id="itemFile">
+			<input type="file" class="form-control" id="itemFile">
 			<div id="uploadedList"></div>
 		</div>
 		<div class="mb-3">
@@ -31,47 +31,65 @@
 		<button type="button" id="btnList" class="btn btn-secondary" th:text="#{action.list}">목록</button>
 	</form>
 
-	<script>
-		var formObj = document.getElementById('submitForm');
-		var btnRegister = document.getElementById('btnRegister');
-		var btnList = document.getElementById('btnList');
-		btnRegister.onclick = function(){
-			formObj.submit();
-		}
-		btnList.onclick = function(){
-			self.location='list';
-		}
-
-		//==================== 파일첨부 ====================
-		var itemFile = document.getElementById('itemFile');
-
-		function getOriginalName(fileName) {
-			var idx = fileName.indexOf('_')+1;
-			return fileName.substr(idx);
-		}
-
-		itemFile.addEventListener('change', (e) => {
-			var files = e.target.files;
-			var file = files[0];
-			var formData = new FormData();
-			const url = "/pds/uploadAjax";
-
-			formData.append('file', file);
-			fetch(url, {
-			    method : "POST",
-			    body: formData,
-			}).then(
-			    response => response.text() // .json(), etc.
-			).then(function(data){
-				console.log('data=', data)
-				var div = document.createElement('div');
-				var html = '<a href="/pds/downloadFile?fileName="'+data+'>'+getOriginalName(data)+'</a><span>X</span>';
-				div.innerHTML = html;
-				document.querySelector('#uploadedList').appendChild(div);
-			});
-		});
-
-	</script>
 </div>
 </body>
 </html>
+
+<script>
+	var formObj = document.getElementById('submitForm');
+	var btnRegister = document.getElementById('btnRegister');
+	var btnList = document.getElementById('btnList');
+	btnRegister.onclick = function(e){
+		e.preventDefault();
+		var html = '';
+		var attachList = uploadList.children;
+		if(attachList.length > 0) {
+			Array.from(uploadList.children).forEach(function(e, i){
+				var href = e.children[0].getAttribute('href');
+				var idx = href.lastIndexOf('=') + 1;
+				var fullName = href.substring(idx, href.length);
+				//console.log(fullName);
+				html += '<input type="hidden" name="files['+i+']" value="'+fullName+'"/>';
+			})
+			console.log(html)
+			formObj.insertAdjacentHTML('afterbegin', html);
+		}
+
+		formObj.submit();
+	}
+	btnList.onclick = function(){
+		self.location='list';
+	}
+
+	//==================== 파일첨부 ====================
+	var itemFile = document.getElementById('itemFile');
+	var uploadList = document.getElementById('uploadedList');
+
+	function getOriginalName(fileName) {
+		var idx = fileName.indexOf('_')+1;
+		return fileName.substr(idx);
+	}
+
+	itemFile.addEventListener('change', (e) => {
+		var files = e.target.files;
+		var file = files[0];
+		var formData = new FormData();
+		const url = "/pds/uploadAjax";
+
+		formData.append('file', file);
+		fetch(url, {
+		    method : "POST",
+		    body: formData,
+		}).then(
+		    response => response.text() // .json(), etc.
+		).then(function(data){
+			//console.log('data=', data)
+			var div = document.createElement('div');
+			var html = '<a href="/pds/downloadFile?fileName='+data+'">'+getOriginalName(data)+'</a><span><a class="removeFileBtn" href="#">X</a></span>';
+			div.innerHTML = html;
+			uploadList.appendChild(div);
+		});
+	});
+
+
+</script>
