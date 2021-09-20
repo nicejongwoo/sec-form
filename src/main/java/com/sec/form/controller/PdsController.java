@@ -1,14 +1,24 @@
 package com.sec.form.controller;
 
+import com.sec.form.common.util.UploadFileUtils;
 import com.sec.form.domain.Pds;
 import com.sec.form.prop.ShopProperties;
 import com.sec.form.service.PdsService;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
+
+@Slf4j
 @RequiredArgsConstructor
 @RequestMapping("/pds")
 @Controller
@@ -16,6 +26,14 @@ public class PdsController {
 
     private final PdsService pdsService;
     private final ShopProperties shopProperties;
+
+    @ResponseBody
+    @PostMapping(value = "/uploadAjax", produces = "text/plain;charset=UTF-8")
+    public ResponseEntity<String> uploadAjax(MultipartFile file) throws IOException {
+        String savedName = UploadFileUtils.uploadFile(shopProperties.getUploadPath(), file.getOriginalFilename(), file.getBytes());
+        log.info("savedName= {}", savedName);
+        return new ResponseEntity<String>(savedName, HttpStatus.CREATED);
+    }
 
     @GetMapping("/register")
     public String registerForm(Model model) {

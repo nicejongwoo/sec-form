@@ -25,7 +25,7 @@ public class UploadFileUtils {
 
     private static String makeUploadFileName(String uploadPath, String savedName, String savedPath) {
         String uploadedFileName = uploadPath + savedPath + File.separator + savedName;
-        return uploadedFileName.substring(uploadPath.length()).replace(File.separatorChar, '/');
+        return uploadedFileName.substring(uploadPath.length()).replace(File.separatorChar, '/'); // \->/ 로 replace 함
     }
 
     private static String calcPath(String uploadPath) {

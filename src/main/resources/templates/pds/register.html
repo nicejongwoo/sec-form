@@ -42,6 +42,35 @@
 			self.location='list';
 		}
 
+		//==================== 파일첨부 ====================
+		var itemFile = document.getElementById('itemFile');
+
+		function getOriginalName(fileName) {
+			var idx = fileName.indexOf('_')+1;
+			return fileName.substr(idx);
+		}
+
+		itemFile.addEventListener('change', (e) => {
+			var files = e.target.files;
+			var file = files[0];
+			var formData = new FormData();
+			const url = "/pds/uploadAjax";
+
+			formData.append('file', file);
+			fetch(url, {
+			    method : "POST",
+			    body: formData,
+			}).then(
+			    response => response.text() // .json(), etc.
+			).then(function(data){
+				console.log('data=', data)
+				var div = document.createElement('div');
+				var html = '<a href="/pds/downloadFile?fileName="'+data+'>'+getOriginalName(data)+'</a><span>X</span>';
+				div.innerHTML = html;
+				document.querySelector('#uploadedList').appendChild(div);
+			});
+		});
+
 	</script>
 </div>
 </body>
