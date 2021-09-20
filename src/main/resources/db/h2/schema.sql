@@ -92,11 +92,11 @@ CREATE TABLE pds (
 );
 
 CREATE TABLE pds_attach (
-    fullName VARCHAR(150) NOT NULL,
+    full_name VARCHAR(150) NOT NULL,
     item_id INT(5) NOT NULL,
     down_cnt INT(6) DEFAULT 0,
     reg_date TIMESTAMP NOT NULL DEFAULT now(),
-    PRIMARY KEY (fullName)
+    PRIMARY KEY (full_name)
 );
 
 
