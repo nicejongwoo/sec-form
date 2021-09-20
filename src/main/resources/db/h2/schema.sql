@@ -78,6 +78,7 @@ CREATE TABLE item (
     price INT(6),
     description VARCHAR(50),
     picture_url VARCHAR(200),
+    preview_url VARCHAR(200),
     PRIMARY KEY (item_id)
 );
 

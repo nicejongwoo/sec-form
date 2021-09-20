@@ -3,6 +3,68 @@
 
 <mapper namespace="com.sec.form.mapper.ItemMapper">
 
+    <insert id="create">
+        INSERT INTO item
+        (
+            item_name,
+            price,
+            description,
+            picture_url,
+            preview_url
+        )
+        VALUES
+        (
+            #{itemName},
+            #{price},
+            #{description},
+            #{pictureUrl},
+            #{previewUrl}
+        )
+    </insert>
 
+    <select id="list" resultType="Item">
+        <![CDATA[
+        SELECT *
+        FROM item
+        WHERE item_id > 0
+        ORDER BY item_id DESC
+        ]]>
+    </select>
+
+    <select id="read" resultType="Item">
+        SELECT *
+        FROM item
+        WHERE item_id = #{itemId}
+    </select>
+
+    <update id="update">
+        UPDATE item
+        SET item_name = #{itemName}
+        , price = #{price}
+        , description = #{description}
+        <if test="pictureUrl != null and pictureUrl != ''">
+            , picture_url = #{pictureUrl}
+        </if>
+        <if test="previewUrl != null and previewUrl != ''">
+            , preview_url = #{previewUrl}
+        </if>
+        WHERE item_id = #{itemId}
+    </update>
+
+    <delete id="delete">
+        DELETE FROM item WHERE item_id = #{itemId}
+    </delete>
+
+    <select id="getPreview" resultType="String">
+        SELECT preview_url
+        FROM item
+        WHERE item_id = #{itemId}
+    </select>
+
+    <select id="getPicture" resultType="String">
+        SELECT picture_url
+        FROM item
+        WHERE item_id = #{itemId}
+    </select>
 
 </mapper>
