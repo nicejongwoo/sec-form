@@ -18,6 +18,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.io.IOException;
+import java.util.List;
 
 @Slf4j
 @RequiredArgsConstructor
@@ -47,6 +48,13 @@ public class PdsController {
         System.out.println("file=" + pds.getFiles());
         pdsService.register(pds);
         redirectAttributes.addFlashAttribute("msg", "success");
+        return "redirect:/pds/list";
+    }
+
+    @GetMapping("/list")
+    public String list(Model model) {
+        List<Pds> pdsList = pdsService.list();
+        model.addAttribute("list", pdsList);
         return "pds/list";
     }
 }

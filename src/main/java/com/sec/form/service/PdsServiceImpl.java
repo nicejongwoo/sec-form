@@ -6,6 +6,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+
 @RequiredArgsConstructor
 @Service
 public class PdsServiceImpl implements PdsService{
@@ -25,4 +27,10 @@ public class PdsServiceImpl implements PdsService{
             pdsMapper.addAttach(fullName);
         }
     }
+
+    @Override
+    public List<Pds> list() {
+        return pdsMapper.list();
+    }
+
 }

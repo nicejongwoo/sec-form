@@ -29,4 +29,13 @@
         )
     </insert>
 
+    <select id="list" resultType="Pds">
+        <![CDATA[
+        SELECT *
+        FROM pds
+        WHERE item_id > 0
+        ORDER BY item_id DESC
+        ]]>
+    </select>
+
 </mapper>
