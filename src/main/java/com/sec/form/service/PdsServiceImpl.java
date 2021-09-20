@@ -33,4 +33,14 @@ public class PdsServiceImpl implements PdsService{
         return pdsMapper.list();
     }
 
+    @Override
+    public Pds read(Integer itemId) {
+        return pdsMapper.read(itemId);
+    }
+
+    @Override
+    public List<String> getAttach(Integer itemId) {
+        return pdsMapper.getAttach(itemId);
+    }
+
 }

@@ -10,4 +10,7 @@ public interface PdsService {
 
     List<Pds> list();
 
+    Pds read(Integer itemId);
+
+    List<String> getAttach(Integer itemId);
 }

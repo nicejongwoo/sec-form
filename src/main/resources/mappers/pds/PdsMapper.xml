@@ -29,6 +29,13 @@
         )
     </insert>
 
+    <select id="getAttach" resultType="String">
+        SELECT full_name
+        FROM pds_attach
+        WHERE item_id = #{itemId}
+        ORDER BY reg_date
+    </select>
+
     <select id="list" resultType="Pds">
         <![CDATA[
         SELECT *
@@ -38,4 +45,9 @@
         ]]>
     </select>
 
+    <select id="read" resultType="Pds">
+        SELECT *
+        FROM pds
+        WHERE item_id = #{itemId}
+    </select>
 </mapper>

@@ -12,4 +12,7 @@ public interface PdsMapper {
 
     List<Pds> list();
 
+    Pds read(Integer itemId);
+
+    List<String> getAttach(Integer itemId);
 }

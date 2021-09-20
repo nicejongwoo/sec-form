@@ -10,14 +10,12 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 @Slf4j
@@ -37,6 +35,13 @@ public class PdsController {
         return new ResponseEntity<String>(savedName, HttpStatus.CREATED);
     }
 
+    @ResponseBody
+    @GetMapping(value = "/getAttach/{itemId}")
+    public List<String> getAttach(@PathVariable("itemId") Integer itemId) {
+        List<String> attach = pdsService.getAttach(itemId);
+        return attach;
+    }
+
     @GetMapping("/register")
     public String registerForm(Model model) {
         model.addAttribute(new Pds());
@@ -45,7 +50,6 @@ public class PdsController {
 
     @PostMapping("/register")
     public String register(Pds pds, RedirectAttributes redirectAttributes) {
-        System.out.println("file=" + pds.getFiles());
         pdsService.register(pds);
         redirectAttributes.addFlashAttribute("msg", "success");
         return "redirect:/pds/list";
@@ -56,5 +60,12 @@ public class PdsController {
         List<Pds> pdsList = pdsService.list();
         model.addAttribute("list", pdsList);
         return "pds/list";
+    }
+
+    @GetMapping("/read")
+    public String read(Integer itemId, Model model) {
+        Pds pds = pdsService.read(itemId);
+        model.addAttribute("pds", pds);
+        return "pds/read";
     }
 }
