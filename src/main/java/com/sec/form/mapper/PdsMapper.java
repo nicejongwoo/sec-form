@@ -15,4 +15,9 @@ public interface PdsMapper {
     Pds read(Integer itemId);
 
     List<String> getAttach(Integer itemId);
+
+    void update(Pds pds);
+
+    void updateAttach(String fullName, Integer itemId);
+
 }

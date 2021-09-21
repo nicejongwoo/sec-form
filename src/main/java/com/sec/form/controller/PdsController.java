@@ -68,4 +68,19 @@ public class PdsController {
         model.addAttribute("pds", pds);
         return "pds/read";
     }
+
+    @GetMapping("/modify")
+    public String modifyForm(Integer itemId, Model model) {
+        Pds pds = pdsService.read(itemId);
+        model.addAttribute("pds", pds);
+        return "pds/modify";
+    }
+
+    @PostMapping("/modify")
+    public String modify(Pds pds, RedirectAttributes redirectAttributes) {
+        pdsService.modify(pds);
+        redirectAttributes.addFlashAttribute("msg", "success");
+        return "redirect:/pds/list";
+    }
+
 }

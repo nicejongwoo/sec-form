@@ -50,4 +50,25 @@
         FROM pds
         WHERE item_id = #{itemId}
     </select>
+
+    <update id="update">
+        UPDATE pds
+        SET item_name = #{itemName},
+        description = #{description}
+        WHERE item_id = #{itemId}
+    </update>
+
+    <update id="updateAttach">
+        INSERT INTO pds_attach
+        (
+            full_name,
+            item_id
+        )
+        VALUES
+        (
+            #{fullName},
+            #{itemId}
+        )
+    </update>
+
 </mapper>

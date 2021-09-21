@@ -13,4 +13,7 @@ public interface PdsService {
     Pds read(Integer itemId);
 
     List<String> getAttach(Integer itemId);
+
+    void modify(Pds pds);
+
 }
