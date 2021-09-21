@@ -54,10 +54,18 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
 //        http.httpBasic();
-        http.formLogin();
+        http
+                .formLogin()
+                .loginPage("/auth/login");
+
         http.authorizeRequests()
                 .requestMatchers(PathRequest.toStaticResources().atCommonLocations()).permitAll()
-                .anyRequest()
-                .authenticated();
+                .antMatchers("/node_modules/**").permitAll()
+                .antMatchers("/", "/auth/login", "/h2-console/**").permitAll()
+                .anyRequest().authenticated();
+
+        //h2 DB console 사용을 위해
+        http.csrf().disable(); //CSRF 중지
+        http.headers().frameOptions().disable(); //X-Frame-Options in Spring Security 중지
     }
 }
