@@ -1,5 +1,7 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
 <head>
 	<meta charset="UTF-8">
 	<title>Header</title>
@@ -17,9 +19,19 @@
 					<li class="nav-item col-6 col-md-auto"><a class="nav-link p-2" href="../item.html" th:href="@{/item/list}" th:text="#{header.item}">item</a></li>
 					<li class="nav-item col-6 col-md-auto"><a class="nav-link p-2" href="../pds.html" th:href="@{/pds/list}" th:text="#{header.pds}">pds</a></li>
 				</ul>
-				<ul class="navbar-nav flex-row flex-wrap ms-md-auto">
+				<ul sec:authorize="!isAuthenticated()" class="navbar-nav flex-row flex-wrap ms-md-auto">
 					<li class="nav-item col-6 col-md-auto"><a class="nav-link p-2" href="/user/register" th:text="#{header.joinMember}">join</a></li>
 					<li class="nav-item col-6 col-md-auto"><a class="nav-link p-2" href="/auth/login" th:text="#{header.login}">login</a></li>
+					<li sec:authorize="isAuthenticated()" class="nav-item col-6 col-md-auto">
+						<div>
+							<span sec:authentication="principal.username" class="navbar-text">홍길동</span>님&nbsp;
+							<a class="nav-link p-2" href="#" th:text="#{header.logout}">logout</a>
+						</div>
+					</li>
+				</ul>
+				<ul sec:authorize="isAuthenticated()" class="navbar-nav flex-row flex-wrap ms-md-auto">
+					<li class="nav-item col-6 col-md-auto"><div class="nav-link p-2"><span sec:authentication="principal.username">홍길동</span>님 반갑습니다</div></li>
+					<li class="nav-item col-6 col-md-auto"><a class="nav-link p-2" href="/auth/logout" th:text="#{header.logout}">logout</a></li>
 				</ul>
 			</div>
 		</nav>
