@@ -66,4 +66,11 @@ public class PdsServiceImpl implements PdsService{
         }
     }
 
+    @Transactional
+    @Override
+    public void remove(Integer itemId) {
+        pdsMapper.deleteAttach(itemId);
+        pdsMapper.delete(itemId);
+    }
+
 }

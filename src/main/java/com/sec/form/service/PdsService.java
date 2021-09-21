@@ -16,4 +16,6 @@ public interface PdsService {
 
     void modify(Pds pds);
 
+    void remove(Integer itemId);
+
 }

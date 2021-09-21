@@ -20,4 +20,7 @@ public interface PdsMapper {
 
     void updateAttach(String fullName, Integer itemId);
 
+    void delete(Integer itemId);
+
+    void deleteAttach(Integer itemId);
 }

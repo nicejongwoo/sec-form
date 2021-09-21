@@ -83,4 +83,11 @@ public class PdsController {
         return "redirect:/pds/list";
     }
 
+    @PostMapping("/remove")
+    public String remove(Integer itemId, RedirectAttributes redirectAttributes) {
+        pdsService.remove(itemId);
+        redirectAttributes.addFlashAttribute("msg", "success");
+        return "redirect:/pds/list";
+    }
+
 }

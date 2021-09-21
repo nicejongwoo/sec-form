@@ -71,4 +71,16 @@
         )
     </update>
 
+    <delete id="delete">
+        DELETE
+        FROM pds
+        WHERE item_id = #{itemId}
+    </delete>
+
+    <delete id="deleteAttach">
+        DELETE
+        FROM pds_attach
+        WHERE item_id = #{itemId}
+    </delete>
+
 </mapper>
