@@ -35,6 +35,7 @@ public class PdsServiceImpl implements PdsService{
 
     @Override
     public Pds read(Integer itemId) {
+        pdsMapper.updateViewCnt(itemId);
         return pdsMapper.read(itemId);
     }
 

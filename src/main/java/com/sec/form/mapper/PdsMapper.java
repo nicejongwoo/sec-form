@@ -23,4 +23,6 @@ public interface PdsMapper {
     void delete(Integer itemId);
 
     void deleteAttach(Integer itemId);
+
+    void updateViewCnt(Integer itemId);
 }
