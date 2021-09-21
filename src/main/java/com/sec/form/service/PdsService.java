@@ -18,4 +18,5 @@ public interface PdsService {
 
     void remove(Integer itemId);
 
+    void updateAttachDownCnt(String fullName);
 }

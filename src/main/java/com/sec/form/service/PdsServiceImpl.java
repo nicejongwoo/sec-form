@@ -74,4 +74,9 @@ public class PdsServiceImpl implements PdsService{
         pdsMapper.delete(itemId);
     }
 
+    @Override
+    public void updateAttachDownCnt(String fullName) {
+        pdsMapper.updateAttachDownCnt(fullName);
+    }
+
 }

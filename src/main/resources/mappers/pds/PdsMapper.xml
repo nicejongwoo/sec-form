@@ -89,4 +89,10 @@
         WHERE item_id = #{itemId}
     </update>
 
+    <update id="updateAttachDownCnt">
+        UPDATE pds_attach
+        SET down_cnt = down_cnt + 1
+        WHERE full_name = #{fullName}
+    </update>
+
 </mapper>
