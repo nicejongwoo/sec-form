@@ -95,4 +95,11 @@
         WHERE full_name = #{fullName}
     </update>
 
+    <delete id="deleteByFullName">
+        DELETE
+        FROM pds_attach
+        WHERE full_name = #{fullName}
+    </delete>
+
+
 </mapper>

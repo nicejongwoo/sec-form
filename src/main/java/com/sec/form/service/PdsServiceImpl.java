@@ -56,14 +56,14 @@ public class PdsServiceImpl implements PdsService{
 
         //기존 DB값 조회
         List<String> attach = pdsMapper.getAttach(pds.getItemId());
+        //기존 DB값 삭제
+        for (String fullName : attach) {
+            pdsMapper.deleteByFullName(fullName);
+        }
 
-        //기존에 들어있던 자료는 그대로 두고 새로 첨부하는 목록만 저장
+        //저장
         for (String fullName : files) {
-            for (String file : attach) {
-                if (!fullName.equals(file)) {
-                    pdsMapper.updateAttach(fullName, pds.getItemId());
-                }
-            }
+            pdsMapper.updateAttach(fullName, pds.getItemId());
         }
     }
 

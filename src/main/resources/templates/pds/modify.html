@@ -33,7 +33,7 @@
 	</form>
 
 
-	<script>
+	<script type="text/javascript" th:inline="javascript">
 		var formObj = document.getElementById('submitForm');
 		var btnModify = document.getElementById('btnModify');
 		var btnList = document.getElementById('btnList');
@@ -83,14 +83,22 @@
 			).then(function(data){
 				//console.log('data=', data)
 				var div = document.createElement('div');
-				var html = '<a href="/pds/downloadFile?fileName='+data+'">'+getOriginalName(data)+'</a><span><a class="removeFileBtn btn btn-danger" href="#">X</a></span>';
+				var html = '<a href="/pds/downloadFile?fileName='+data+'">'+getOriginalName(data)+'</a><span><a class="removeFileBtn" href="#">X</a></span>';
 				div.innerHTML = html;
 				uploadList.appendChild(div);
+
+				itemFile.value = '';
+
+
+				var removeBtn = document.querySelectorAll('.removeFileBtn');
+				for (var i = 0 ; i < removeBtn.length; i++) {
+			        removeBtn[i].addEventListener("click", removeAttachHandler, false);
+				}
+
 			});
 		});
-	</script>
 
-	<script type="text/javascript" th:inline="javascript">
+
 		function getOriginalName(fileName) {
 			var idx = fileName.indexOf('_')+1;
 			return fileName.substr(idx);
@@ -111,7 +119,20 @@
 			frag = document.createRange().createContextualFragment(html);
 
 			uploadList.appendChild(frag);
+
+			var removeBtn = document.querySelectorAll('.removeFileBtn');
+			for (var i = 0 ; i < removeBtn.length; i++) {
+		        removeBtn[i].addEventListener("click", removeAttachHandler, false);
+			}
 		});
+
+
+
+		function removeAttachHandler (e) {
+	        // Implement the click handler here for button of class 'remove'
+	        var target = e.target;
+	        target.parentNode.parentNode.remove();
+		}
 	</script>
 
 </div>

@@ -27,4 +27,6 @@ public interface PdsMapper {
     void updateViewCnt(Integer itemId);
 
     void updateAttachDownCnt(String fullName);
+
+    void deleteByFullName(String fullName);
 }
