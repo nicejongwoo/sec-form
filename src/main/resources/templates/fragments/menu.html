@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<head>
+	<meta charset="UTF-8">
+	<title>Menu</title>
+</head>
+<body>
+
+	<ul class="navbar-nav flex-row flex-wrap bd-navbar-nav pt-2 py-md-0" th:fragment="menu">
+		<li class="nav-item col-6 col-md-auto"><a class="nav-link p-2" href="../home.html" th:href="@{/}" th:text="#{header.home}">home</a></li>
+
+		<th:block sec:authorize="!isAuthenticated()">
+			<li class="nav-item col-6 col-md-auto"><a class="nav-link p-2" href="../notice.html" th:href="@{/notice/list}" th:text="#{header.notice}">notice</a></li>
+			<li class="nav-item col-6 col-md-auto"><a class="nav-link p-2" href="../board.html" th:href="@{/board/list}" th:text="#{header.board}">board</a></li>
+		</th:block>
+
+		<th:block sec:authorize="isAuthenticated()">
+			<th:block sec:authorize="hasRole('ADMIN')">
+				<li class="nav-item col-6 col-md-auto"><a class="nav-link p-2" href="../notice.html" th:href="@{/notice/list}" th:text="#{header.notice}">notice</a></li>
+				<li class="nav-item col-6 col-md-auto"><a class="nav-link p-2" href="../board.html" th:href="@{/board/list}" th:text="#{header.board}">board</a></li>
+				<li class="nav-item col-6 col-md-auto"><a class="nav-link p-2" href="../codegroup.html" th:href="@{/codegroup/list}" th:text="#{header.codegroup}">codegroup</a></li>
+				<li class="nav-item col-6 col-md-auto"><a class="nav-link p-2" href="../codedetail.html" th:href="@{/codedetail/list}" th:text="#{header.codedetail}">codedetail</a></li>
+				<li class="nav-item col-6 col-md-auto"><a class="nav-link p-2" href="../item.html" th:href="@{/item/list}" th:text="#{header.item}">item</a></li>
+				<li class="nav-item col-6 col-md-auto"><a class="nav-link p-2" href="../pds.html" th:href="@{/pds/list}" th:text="#{header.pds}">pds</a></li>
+			</th:block>
+			<th:block sec:authorize="hasRole('MEMBER')">
+				<li class="nav-item col-6 col-md-auto"><a class="nav-link p-2" href="../notice.html" th:href="@{/notice/list}" th:text="#{header.notice}">notice</a></li>
+				<li class="nav-item col-6 col-md-auto"><a class="nav-link p-2" href="../board.html" th:href="@{/board/list}" th:text="#{header.board}">board</a></li>
+			</th:block>
+		</th:block>
+	</ul>
+
+</body>
+</html>
