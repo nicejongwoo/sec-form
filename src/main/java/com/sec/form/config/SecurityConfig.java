@@ -1,5 +1,6 @@
 package com.sec.form.config;
 
+import com.sec.form.handler.CustomLoginFailureHandler;
 import com.sec.form.handler.CustomLoginSuccessHandler;
 import org.springframework.boot.autoconfigure.security.servlet.PathRequest;
 import org.springframework.context.annotation.Bean;
@@ -9,6 +10,7 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.web.authentication.AuthenticationFailureHandler;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 
 @EnableWebSecurity
@@ -58,6 +60,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         return new CustomLoginSuccessHandler();
     }
 
+    @Bean
+    public AuthenticationFailureHandler authenticationFailureHandler() {
+        return new CustomLoginFailureHandler();
+    }
+
     @Override
     protected void configure(HttpSecurity http) throws Exception {
 //        http.httpBasic();
@@ -65,6 +72,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .formLogin()
                 .loginPage("/auth/login")
                 .successHandler(authenticationSuccessHandler())
+                .failureHandler(authenticationFailureHandler())
         ;
 
         http.authorizeRequests()
