@@ -26,11 +26,23 @@
 
 				<ul sec:authorize="isAuthenticated()" class="navbar-nav flex-row flex-wrap ms-md-auto">
 					<li class="nav-item col-6 col-md-auto"><div class="nav-link p-2"><span sec:authentication="principal.username">홍길동</span>님 반갑습니다</div></li>
-					<li class="nav-item col-6 col-md-auto"><a class="nav-link p-2" href="/auth/logout" th:text="#{header.logout}">logout</a></li>
+					<li class="nav-item col-6 col-md-auto"><a id="logout" class="nav-link p-2" href="/auth/logout" th:text="#{header.logout}">logout</a></li>
 				</ul>
 
 			</div>
 		</nav>
 	</div>
+
+	<form id="logoutSubmitForm" action="logout.html" th:href="@{/auth/logout}" method="post">
+	</form>
+
+	<script>
+		var logoutBtn = document.getElementById('logout');
+		var logoutForm = document.getElementById('logoutSubmitForm');
+		logoutBtn.onclick = function(e){
+			e.preventDefault();
+			logoutForm.submit();
+		}
+	</script>
 </body>
 </html>

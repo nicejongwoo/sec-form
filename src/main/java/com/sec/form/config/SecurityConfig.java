@@ -75,6 +75,12 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .failureHandler(authenticationFailureHandler())
         ;
 
+        http
+                .logout()
+                .logoutUrl("/auth/logout") //form의 action과 일치
+                .logoutSuccessUrl("/") //로그아웃 성공 후 홈으로 이동
+                .permitAll();
+
         http.authorizeRequests()
                 .requestMatchers(PathRequest.toStaticResources().atCommonLocations()).permitAll()
                 .antMatchers("/node_modules/**").permitAll()
