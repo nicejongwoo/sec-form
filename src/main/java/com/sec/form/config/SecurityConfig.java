@@ -2,6 +2,7 @@ package com.sec.form.config;
 
 import com.sec.form.handler.CustomLoginFailureHandler;
 import com.sec.form.handler.CustomLoginSuccessHandler;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.security.servlet.PathRequest;
 import org.springframework.context.annotation.Bean;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
@@ -13,17 +14,23 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.AuthenticationFailureHandler;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 
+import javax.sql.DataSource;
+
 @EnableWebSecurity
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
+    @Autowired
+    DataSource dataSource;
+
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-        auth.inMemoryAuthentication()
-                .withUser("user").password(passwordEncoder().encode("123")).roles("MEMBER")
-                .and()
-                .withUser("manager").password(passwordEncoder().encode("123")).roles("MEMBER", "ADMIN")
-                .and()
-                .withUser("admin").password(passwordEncoder().encode("123")).roles("ADMIN");
+        String query1 = "SELECT user_id, user_pw, enabled FROM member WHERE user_id = ?";
+        String query2 = "SELECT m.user_id, a.auth FROM member_auth AS a, member AS m WHERE a.user_no = m.user_no AND m.user_id = ?";
+        auth.jdbcAuthentication()
+                .dataSource(dataSource)
+                .usersByUsernameQuery(query1)
+                .authoritiesByUsernameQuery(query2)
+                .passwordEncoder(passwordEncoder());
     }
 
     @Bean
