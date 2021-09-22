@@ -26,30 +26,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .withUser("admin").password(passwordEncoder().encode("123")).roles("ADMIN");
     }
 
-//    //UserDetailsService 재정의
-//    @Bean
-//    @Override
-//    public UserDetailsService userDetailsService() {
-//        User.UserBuilder users = User.withDefaultPasswordEncoder();
-//
-//        UserDetails user = users.username("user")
-//                .password("123")
-//                .roles("MEMBER")
-//                .build();
-//
-//        UserDetails manager = users.username("manager")
-//                .password("123")
-//                .roles("MEMBER", "ADMIN")
-//                .build();
-//
-//        UserDetails admin = users.username("admin")
-//                .password("123")
-//                .roles("ADMIN")
-//                .build();
-//
-//        return new InMemoryUserDetailsManager(user, manager, admin);
-//    }
-
     @Bean
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
@@ -68,23 +44,20 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
 //        http.httpBasic();
-        http
-                .formLogin()
+        http.formLogin()
                 .loginPage("/auth/login")
                 .successHandler(authenticationSuccessHandler())
-                .failureHandler(authenticationFailureHandler())
-        ;
+                .failureHandler(authenticationFailureHandler());
 
-        http
-                .logout()
+        http.logout()
                 .logoutUrl("/auth/logout") //form의 action과 일치
                 .logoutSuccessUrl("/") //로그아웃 성공 후 홈으로 이동
                 .permitAll();
 
         http.authorizeRequests()
                 .requestMatchers(PathRequest.toStaticResources().atCommonLocations()).permitAll()
-                .antMatchers("/node_modules/**").permitAll()
-                .antMatchers("/", "/auth/login", "/h2-console/**").permitAll()
+                .antMatchers("/node_modules/**", "/h2-console/**").permitAll()
+                .antMatchers("/", "/auth/login").permitAll()
                 .anyRequest().authenticated();
 
         //h2 DB console 사용을 위해
