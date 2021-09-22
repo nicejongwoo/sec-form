@@ -56,7 +56,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 //        http.httpBasic();
         http
                 .formLogin()
-                .loginPage("/auth/login");
+                .loginPage("/auth/login")
+                .failureUrl("/")
+                .defaultSuccessUrl("/", true)
+        ;
 
         http.authorizeRequests()
                 .requestMatchers(PathRequest.toStaticResources().atCommonLocations()).permitAll()
