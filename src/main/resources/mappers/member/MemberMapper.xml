@@ -34,4 +34,30 @@
         )
     </insert>
 
+    <resultMap id="memberMap" type="Member">
+        <id property="userNo" column="user_no" />
+        <result property="userNo" column="user_no" />
+        <result property="userId" column="user_id" />
+        <result property="userPw" column="user_pw" />
+        <result property="userName" column="user_name" />
+        <result property="job" column="job" />
+        <result property="coin" column="coin" />
+        <result property="enabled" column="enabled" />
+        <result property="regDate" column="reg_date" />
+        <result property="updateDate" column="update_date" />
+        <collection property="authList" resultMap="authMap"/>
+    </resultMap>
+
+    <resultMap id="authMap" type="MemberAuth">
+        <result property="userNo" column="user_no"/>
+        <result property="auth" column="auth"/>
+    </resultMap>
+
+    <select id="readByUserId" resultMap="memberMap">
+        SELECT m.user_no, m.user_id, m.user_pw, m.user_name, m.job, m.coin, m.reg_date, m.update_date, m.enabled, a.auth
+        FROM member AS m
+        LEFT OUTER JOIN member_auth AS a ON m.user_no = a.user_no
+        WHERE m.user_id = #{userId}
+    </select>
+
 </mapper>

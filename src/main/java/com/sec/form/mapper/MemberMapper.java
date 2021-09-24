@@ -7,4 +7,6 @@ public interface MemberMapper {
     void create(Member member);
 
     void createAuth(MemberAuth memberAuth);
+
+    Member readByUserId(String userId);
 }
