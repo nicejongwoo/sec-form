@@ -1,8 +1,11 @@
 package com.sec.form.controller;
 
+import com.sec.form.common.security.domain.CustomUser;
 import com.sec.form.domain.Board;
+import com.sec.form.domain.Member;
 import com.sec.form.service.BoardService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -20,8 +23,14 @@ public class BoardController {
     private final BoardService boardService;
 
     @GetMapping("/register")
-    public void registerForm(Model model) {
-        model.addAttribute(new Board());
+    public void registerForm(Model model, Authentication authentication) {
+        CustomUser user = (CustomUser) authentication.getPrincipal();
+        Member member = user.getMember();
+
+        Board board = new Board();
+        board.setWriter(member.getUserId());
+
+        model.addAttribute(board);
     }
 
     @PostMapping("/register")
