@@ -66,6 +66,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .requestMatchers(PathRequest.toStaticResources().atCommonLocations()).permitAll()
                 .antMatchers("/node_modules/**", "/h2-console/**").permitAll()
                 .antMatchers("/", "/auth/login").permitAll()
+                .antMatchers("/user/register", "/user/registerSuccess").permitAll()
                 .anyRequest().authenticated();
 
         //h2 DB console 사용을 위해
