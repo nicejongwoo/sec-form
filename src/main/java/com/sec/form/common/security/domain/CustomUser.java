@@ -1,5 +1,6 @@
-package com.sec.form.domain;
+package com.sec.form.common.security.domain;
 
+import com.sec.form.domain.Member;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.User;

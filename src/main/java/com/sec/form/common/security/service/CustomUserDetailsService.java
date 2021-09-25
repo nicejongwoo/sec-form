@@ -1,6 +1,6 @@
 package com.sec.form.service;
 
-import com.sec.form.domain.CustomUser;
+import com.sec.form.common.security.domain.CustomUser;
 import com.sec.form.domain.Member;
 import com.sec.form.mapper.MemberMapper;
 import lombok.extern.slf4j.Slf4j;
