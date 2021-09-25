@@ -69,6 +69,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/user/register", "/user/registerSuccess").permitAll()
                 .anyRequest().authenticated();
 
+        http.rememberMe()
+                .key("123456789")
+                .tokenValiditySeconds(60 * 60 * 24);
+
         //h2 DB console 사용을 위해
         http.csrf().disable(); //CSRF 중지
         http.headers().frameOptions().disable(); //X-Frame-Options in Spring Security 중지
