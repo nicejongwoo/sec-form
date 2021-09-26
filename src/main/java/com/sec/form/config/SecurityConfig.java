@@ -1,6 +1,7 @@
 package com.sec.form.config;
 
 import com.sec.form.common.security.handler.CustomAccessDeniedHandler;
+import com.sec.form.common.security.handler.CustomAuthenticationEntryPoint;
 import com.sec.form.handler.CustomLoginFailureHandler;
 import com.sec.form.handler.CustomLoginSuccessHandler;
 import com.sec.form.service.CustomUserDetailsService;
@@ -83,7 +84,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
 //        http.exceptionHandling().accessDeniedPage("/error/accessError");
 
-        http.exceptionHandling().accessDeniedHandler(accessDeniedHandler());
+        http.exceptionHandling()
+                .authenticationEntryPoint(new CustomAuthenticationEntryPoint()) //사용자인증 엔트리포인트 객체 지정
+                .accessDeniedHandler(accessDeniedHandler());
 
         http.rememberMe()
                 .userDetailsService(customUserDetailsService())
