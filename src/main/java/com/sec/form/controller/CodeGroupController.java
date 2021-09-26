@@ -3,6 +3,7 @@ package com.sec.form.controller;
 import com.sec.form.domain.CodeGroup;
 import com.sec.form.service.CodeGroupService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -10,6 +11,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+
+@Secured("ROLE_ADMIN")
 @RequiredArgsConstructor
 @RequestMapping("/codegroup")
 @Controller
