@@ -70,7 +70,16 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/node_modules/**", "/h2-console/**").permitAll()
                 .antMatchers("/", "/auth/login").permitAll()
                 .antMatchers("/user/register", "/user/registerSuccess").permitAll()
+                .antMatchers("/codegroup/**").hasRole("ADMIN")
+                .antMatchers("/codedetail/**").hasRole("ADMIN")
+                .antMatchers("/board/list", "/board/read").permitAll()
+                .antMatchers("/board/register", "/board/modify").hasRole("MEMBER")
+                .antMatchers("/board/remove").hasAnyRole("MEMBER", "ADMIN")
+                .antMatchers("/notice/list", "/notice/read").permitAll()
+                .antMatchers("/notice/register", "/notice/modify", "/notice/remove").hasRole("ADMIN")
                 .anyRequest().authenticated();
+
+        http.exceptionHandling().accessDeniedPage("/error/accessError");
 
         http.rememberMe()
                 .userDetailsService(customUserDetailsService())

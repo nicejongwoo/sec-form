@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layouts/main_template}">
+<head>
+	<meta charset="UTF-8" http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+	<title>notice</title>
+</head>
+<body>
+<div layout:fragment="content">
+	<div class="text-center">
+		<h2 th:text="#{common.error.accessDeniedPage}">Error</h2>
+		<a href="#" th:onclick="goBack(event);" th:text="#{common.error.backPage}">이전페이지</a>
+		<br />
+		<a href="/" th:text="#{common.error.returnHome}">홈으로</a>
+	</div>
+	<script>
+		function goBack(event){
+			event.preventDefault();
+			window.history.back();
+		}
+
+	</script>
+</div>
+</body>
+</html>
