@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en"
       xmlns:th="http://thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorate="~{layouts/main_template}">
 <head>
@@ -33,10 +34,20 @@
 		</table>
 	</form>
 
-	<div class="btn-group">
-		<button type="button" id="btnModify" class="btn btn-primary" th:text="#{action.modify}">수정</button>
-		<button type="button" id="btnList" class="btn btn-secondary" th:text="#{action.list}">목록</button>
-		<button type="button" id="btnRemove" class="btn btn-danger" th:text="#{action.remove}">삭제</button>
+
+	<div class="btn-group" th:with="pinfo=${authentication.principal}">
+		<th:block sec:authorize="hasRole('MEMBER')">
+			<th:blcok th:if="${pinfo.username eq board.writer}">
+				<button type="button" id="btnModify" class="btn btn-primary" th:text="#{action.modify}">수정</button>
+				<button type="button" id="btnRemove" class="btn btn-danger" th:text="#{action.remove}">삭제</button>
+			</th:blcok>
+		</th:block>
+		<th:block sec:authorize="hasRole('ADMIN')">
+			<button type="button" id="btnRemove" class="btn btn-danger" th:text="#{action.remove}">삭제</button>
+		</th:block>
+		<th:block>
+			<button type="button" id="btnList" class="btn btn-secondary" th:text="#{action.list}">목록</button>
+		</th:block>
 	</div>
 
 	<script th:inline="javascript">

@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en"
       xmlns:th="http://thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorate="~{layouts/main_template}">
 <head>
@@ -27,7 +28,13 @@
 			<textarea name="content" id="content" th:field="*{content}"></textarea>
 			<div id="contentHelp" class="form-text error_message" th:if="${#fields.hasErrors('content')}" th:errors="*{content}">에러메시지</div>
 		</div>
-		<button type="submit" id="btnModify" class="btn btn-primary" th:text="#{action.modify}">수정</button>
+		<th:block th:with="pinfo=${#authentication.principal}">
+			<th:block sec:authorize="hasRole('MEMBER')">
+				<th:block th:if="${pinfo.username eq board.writer}">
+					<button type="submit" id="btnModify" class="btn btn-primary" th:text="#{action.modify}">수정</button>
+				</th:block>
+			</th:block>
+		</th:block>
 		<button type="button" id="btnList" class="btn btn-secondary" th:text="#{action.list}">목록</button>
 	</form>
 

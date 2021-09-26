@@ -50,9 +50,10 @@ public class BoardController {
     }
 
     @GetMapping("/read")
-    public void read(int boardNo, Model model) {
+    public void read(int boardNo, Model model, Authentication authentication) {
         Board board = boardService.read(boardNo);
         model.addAttribute("board", board);
+        model.addAttribute("authentication", authentication);
     }
 
     @PreAuthorize("hasRole('MEMBER')")
