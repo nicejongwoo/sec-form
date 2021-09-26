@@ -1,5 +1,6 @@
 package com.sec.form.config;
 
+import com.sec.form.common.security.handler.CustomAccessDeniedHandler;
 import com.sec.form.handler.CustomLoginFailureHandler;
 import com.sec.form.handler.CustomLoginSuccessHandler;
 import com.sec.form.service.CustomUserDetailsService;
@@ -14,6 +15,7 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.web.access.AccessDeniedHandler;
 import org.springframework.security.web.authentication.AuthenticationFailureHandler;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 import org.springframework.security.web.authentication.rememberme.JdbcTokenRepositoryImpl;
@@ -79,7 +81,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/notice/register", "/notice/modify", "/notice/remove").hasRole("ADMIN")
                 .anyRequest().authenticated();
 
-        http.exceptionHandling().accessDeniedPage("/error/accessError");
+//        http.exceptionHandling().accessDeniedPage("/error/accessError");
+
+        http.exceptionHandling().accessDeniedHandler(accessDeniedHandler());
 
         http.rememberMe()
                 .userDetailsService(customUserDetailsService())
@@ -90,6 +94,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         //h2 DB console 사용을 위해
         http.csrf().disable(); //CSRF 중지
         http.headers().frameOptions().disable(); //X-Frame-Options in Spring Security 중지
+    }
+
+    @Bean
+    public AccessDeniedHandler accessDeniedHandler() {
+        return new CustomAccessDeniedHandler();
     }
 
     private PersistentTokenRepository createJdbcRepository() {
