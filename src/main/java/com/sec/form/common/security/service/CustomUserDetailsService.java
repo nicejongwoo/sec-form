@@ -1,4 +1,4 @@
-package com.sec.form.service;
+package com.sec.form.common.security.service;
 
 import com.sec.form.common.security.domain.CustomUser;
 import com.sec.form.domain.Member;
