@@ -2,11 +2,10 @@ package com.sec.form.config;
 
 import com.sec.form.common.security.handler.CustomAccessDeniedHandler;
 import com.sec.form.common.security.handler.CustomAuthenticationEntryPoint;
+import com.sec.form.common.security.service.CustomUserDetailsService;
 import com.sec.form.handler.CustomLoginFailureHandler;
 import com.sec.form.handler.CustomLoginSuccessHandler;
-import com.sec.form.service.CustomUserDetailsService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.security.servlet.PathRequest;
 import org.springframework.context.annotation.Bean;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
